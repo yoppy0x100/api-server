@@ -49,7 +49,7 @@ app.get("/api/tokkit", async (req, res) => {
     if (username !== undefined) {
         const dataUsername = await getUsername(username)
         
-        return res.json(dataUsername);
+        return res.status(200).send(dataUsername);
     }
 
     // Parameter music
@@ -64,7 +64,7 @@ app.get("/api/tokkit", async (req, res) => {
     // Parameter video
     if (video !== undefined) {
         const resVideo = await getVideo(video)
-        return res.json(resVideo);
+        return res.status(200).send(resVideo);
     }
 });
 
@@ -72,7 +72,7 @@ app.get("/api/gacoanfinder", async (req, res) => {
     const gac = new gacoanApi()
     const resp = await gac.run();
     const data = gac.getJson();
-    return res.json(data);
+    return res.status(200).send(data);
 });
 
 module.exports = app
