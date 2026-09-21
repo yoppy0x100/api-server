@@ -1,9 +1,7 @@
 const express = require("express");
 const cors = require('cors')
 const htmlparser2= require("htmlparser2")
-const gacoanApi = require("./lib/gacoanApi");
-// const jsdom = require("jsdom");
-// const { JSDOM } = jsdom;
+const gacoanApi = require("../lib/gacoanApi.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,10 +47,6 @@ async function getMusic(music) {
             'upgrade-insecure-requests': '1',
             'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1',
         },
-        // "headers": {
-        //     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-        //     "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1"
-        // },
         "body": null,
         "method": "GET",
     });
@@ -60,15 +54,6 @@ async function getMusic(music) {
     const datana = await resp.text();
     const domna = new htmlparser2.parseDocument(datana.trim());
     console.log(htmlparser2.DomUtils.getElementsByTagName('video', domna));
-    
-    // const regex = /<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__" type="application\/json">([\s\S]*?)<\/script>/im;
-    // const match = datana.match(regex);
-
-    // if (!match || !match[1]) {
-    //     throw new Error('Tag script dengan ID __UNIVERSAL_DATA_FOR_REHYDRATION__ tidak ditemukan.');
-    // }
-
-    // return JSON.parse(match[1].trim());
 }
 async function getVideo(urlna) {
     const resp = await fetch(urlna, {
@@ -153,6 +138,4 @@ app.get("/api/gacoanfinder", async (req, res) => {
     return res.json(data);
 });
 
-app.listen(PORT, "0.0.0.0",() => {
-    console.log(`Server running on port ${PORT}`);
-});
+export.module = app
