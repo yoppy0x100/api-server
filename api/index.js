@@ -1,5 +1,5 @@
 const express = require("express");
-//const cors = require('cors')
+const cors = require('cors')
 const gacoanApi = require("../lib/gacoanApi.js");
 
 const app = express();
@@ -29,7 +29,7 @@ async function getUsername(username) {
     return parse["__DEFAULT_SCOPE__"]["webapp.user-detail"]["userInfo"];
 }
 
-//app.use(cors())
+app.use(cors())
 
 app.get("/api/tokkit", async (req, res) => {
     const { username, music, video } = req.query;
