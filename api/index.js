@@ -138,4 +138,4 @@ app.get("/api/gacoanfinder", async (req, res) => {
     return res.json(data);
 });
 
-export.module = app
+module.exports = app
