@@ -5,6 +5,7 @@ const gacoanApi = require("../lib/gacoanApi.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.use(express.json());
 
 async function getUsername(username) {
     const resp = await fetch("https://www.tiktok.com/@" + username, {
