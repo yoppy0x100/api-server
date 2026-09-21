@@ -1,10 +1,14 @@
 const express = require("express");
 const cors = require('cors')
+const path = require('path');
 const gacoanApi = require("../lib/gacoanApi.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, '../public')));
 
 async function getUsername(username) {
     const resp = await fetch("https://www.tiktok.com/@" + username, {
